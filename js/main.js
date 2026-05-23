@@ -226,9 +226,9 @@
     const billFord = Math.ceil((kobmeter * 1.25) / 3.5);
 
     kobmEl.textContent = '~' + Math.round(kobmeter) + ' m³';
-    idoEl.textContent  = 'Becsült idő: ' + oraMinR + '–' + oraMaxR + ' óra';
-    billEl.textContent = '~' + billFord + ' forduló';
-    gepEl.textContent  = 'Ajánlott gép: Yanmar ' + gepTipus.replace('VIO', 'VIO ');
+    idoEl.textContent  = oraMinR + '–' + oraMaxR + ' óra';
+    billEl.textContent = '~' + billFord;
+    gepEl.textContent  = 'Yanmar ' + gepTipus.replace('VIO', 'VIO ');
     warnEl.hidden      = melyseg <= 2.1;
     outEl.hidden       = false;
   }

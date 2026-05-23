@@ -1099,11 +1099,11 @@ textarea.form-ctrl { resize: vertical; min-height: 100px; }
 }
 .kalk__out-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px 48px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px 40px;
   margin-bottom: 28px;
 }
-.kalk__stat { display: flex; flex-direction: column; gap: 8px; }
+.kalk__stat { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 .kalk__num {
   font-family: var(--font-d);
   font-weight: 900;
@@ -1111,6 +1111,8 @@ textarea.form-ctrl { resize: vertical; min-height: 100px; }
   color: var(--orange);
   letter-spacing: -0.03em;
   line-height: 1;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 .kalk__sub {
   font-family: var(--font-d);
@@ -1155,12 +1157,13 @@ textarea.form-ctrl { resize: vertical; min-height: 100px; }
 
 @media (max-width: 1023px) {
   .kalk__inputs { grid-template-columns: repeat(3, 1fr); }
+  .kalk__out-grid { grid-template-columns: 1fr 1fr; gap: 24px 28px; }
 }
 @media (max-width: 767px) {
   .kalk { padding: 72px 0; }
   .kalk__inputs { grid-template-columns: 1fr; padding: 24px 20px 20px; }
   .kalk__output { padding: 24px 20px; }
-  .kalk__out-grid { grid-template-columns: 1fr 1fr; gap: 20px 24px; }
+  .kalk__out-grid { grid-template-columns: 1fr 1fr; gap: 24px 20px; }
 }
 
 /* ═══════════════════════════════════════════
