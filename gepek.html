@@ -7,225 +7,257 @@
   <meta name="description" content="KotróBázis gépparkja: Yanmar VIO 57 (5,7t) és VIO 17 (1,7t) nullafordulatos kotrógép + 3,5t-s billencs. Pécs és vonzáskörzete.">
   <meta property="og:title" content="Gépparkunk – KotróBázis">
   <meta property="og:description" content="Yanmar VIO 57 és VIO 17 kotrógép + saját billencs. Minden munkát elvállalunk Pécs és 40 km-es körzetében.">
-  <link rel="canonical" href="https://kotrobazis.hu/gepek.html">
+  <link rel="canonical" href="https://kotrobazis.hu/gepek">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* specs table – gepek.html only */
+    .specs-tbl { width: 100%; border-collapse: collapse; margin-top: 32px; }
+    .specs-tbl tr { border-bottom: 1px solid var(--border-ow); }
+    .specs-tbl td { padding: 11px 0; font-size: 0.9rem; }
+    .specs-tbl td:first-child { color: var(--text-muted); font-weight: 300; }
+    .specs-tbl td:last-child { font-family: var(--font-d); font-weight: 700; font-size: 1rem; text-align: right; color: var(--black); }
+    /* comparison table */
+    .cmp-section { background: var(--grey-lt); padding: 100px 0; border-top: 2px solid var(--black); }
+    .cmp-tbl { width: 100%; border-collapse: collapse; margin-top: 48px; }
+    .cmp-tbl th { font-family: var(--font-d); font-weight: 900; font-size: 1.1rem; text-transform: uppercase; padding: 14px 20px; border-bottom: 2px solid var(--black); }
+    .cmp-tbl th:first-child { text-align: left; font-size: 0.66rem; letter-spacing: 0.22em; font-weight: 600; color: var(--grey-txt); }
+    .cmp-tbl td { padding: 13px 20px; border-bottom: 1px solid var(--border-ow); font-size: 0.9rem; text-align: center; }
+    .cmp-tbl td:first-child { text-align: left; color: var(--text-muted); font-weight: 300; padding-left: 0; }
+    .cmp-check { color: var(--orange); font-family: var(--font-d); font-weight: 900; font-size: 0.88rem; letter-spacing: 0.06em; }
+    .cmp-no { color: var(--grey-txt); font-size: 0.82rem; }
+    .cmp-val { font-family: var(--font-d); font-weight: 900; }
+    /* gepek page hero override */
+    .gpk-cta { background: var(--black); padding: 80px 0; }
+    .gpk-cta__inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+    .gpk-cta__text h2 { font-size: clamp(2rem, 4vw, 3.2rem); color: var(--ow); margin-bottom: 10px; }
+    .gpk-cta__text p { color: rgba(245,240,232,0.45); font-weight: 300; font-size: 0.95rem; max-width: 420px; }
+    .gpk-cta__btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  </style>
 </head>
 <body>
 
-<!-- ══ FLOATING WHATSAPP ══════════════════ -->
+<!-- ══ FLOATING WHATSAPP ══════════════════════ -->
 <a href="https://wa.me/36309602965" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp üzenet">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#fff"/></svg>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#fff"/>
+  </svg>
 </a>
 
-<!-- ══ NAV ════════════════════════════════ -->
-<nav class="nav" role="navigation">
+<!-- ══ NAV ════════════════════════════════════ -->
+<nav class="nav scrolled" role="navigation" aria-label="Fő navigáció">
   <div class="container nav__inner">
-    <a href="index.html" class="nav__logo">KOTRÓ<span class="sep">|</span>BÁZIS</a>
-    <ul class="nav__links">
-      <li><a href="index.html#miertmi">Miért mi</a></li>
-      <li><a href="index.html#szolgaltatasok">Szolgáltatások</a></li>
-      <li><a href="index.html#referenciak">Referenciák</a></li>
-      <li><a href="gepek.html" class="active">Gépek</a></li>
-      <li><a href="index.html#kapcsolat" class="nav__cta">Ajánlatkérés</a></li>
-    </ul>
-    <button class="nav__burger" aria-label="Menü">
-      <span></span><span></span><span></span>
-    </button>
+    <a href="/" class="nav__logo" aria-label="KotróBázis főoldal">KOTRÓ<span class="sep"></span>BÁZIS</a>
+    <div class="nav__right">
+      <a href="tel:+36309602965" class="nav__phone">+36 30 960 2965</a>
+      <a href="index.html#kapcsolat" class="btn btn--solid">Ajánlatot kérek</a>
+      <button class="nav__burger" aria-label="Menü megnyitása" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </nav>
-<nav class="nav__mobile">
-  <a href="index.html#miertmi">Miért mi</a>
-  <a href="index.html#szolgaltatasok">Szolgáltatások</a>
-  <a href="index.html#referenciak">Referenciák</a>
-  <a href="gepek.html">Gépek</a>
-  <a href="index.html#kapcsolat" style="color:var(--orange)">Ajánlatkérés →</a>
-</nav>
 
-<!-- ══ PAGE HERO ══════════════════════════ -->
+<!-- Mobile drawer -->
+<div class="nav__drawer" role="menu" aria-label="Mobil navigáció">
+  <a href="index.html#gepek" role="menuitem">Gépparkunk</a>
+  <a href="index.html#szolgaltatasok" role="menuitem">Szolgáltatások</a>
+  <a href="index.html#referenciak" role="menuitem">Referenciák</a>
+  <a href="index.html#kapcsolat" role="menuitem">Kapcsolat</a>
+  <a href="tel:+36309602965" class="btn btn--solid" style="margin-top:20px;justify-content:center;">+36 30 960 2965</a>
+</div>
+
+<!-- ══ PAGE HERO ══════════════════════════════ -->
 <header class="page-hero">
   <div class="container">
-    <p class="eyebrow">Saját géppark</p>
+    <span class="label">Saját géppark</span>
     <h1>Gépparkunk – Pécs<br>és vonzáskörzete</h1>
-    <p>Két Yanmar VIO nullafordulatos kotrógép és saját 3,5t-s billencs – az ásástól az elszállításig mindent egy csapatban.</p>
-    <a href="index.html#kapcsolat" class="btn-primary" style="display:inline-flex;align-items:center;gap:10px">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-      Ajánlatkérés
-    </a>
+    <p>Két Yanmar VIO nullafordulatos kotrógép és saját 3,5t-s billencs – az ásástól az elszállításig mindent egy csapatban, várakozás nélkül.</p>
+    <a href="index.html#kapcsolat" class="btn btn--solid">Ajánlatot kérek</a>
   </div>
 </header>
 
-<!-- ══ FLEET ══════════════════════════════ -->
-<section class="fleet">
-  <div class="container">
+<!-- ══ MACHINES ══════════════════════════════ -->
+<section aria-label="Géppark részletesen">
 
-    <div class="fleet__grid" id="fleet-grid">
-
-      <!-- VIO 57 -->
-      <article class="machine-card reveal">
-        <div class="machine-card__img">
-          <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".5">
-            <rect x="4" y="18" width="30" height="22" rx="2"/>
-            <rect x="34" y="24" width="18" height="10" rx="1"/>
-            <line x1="8" y1="40" x2="48" y2="40"/>
-            <circle cx="12" cy="44" r="4"/><circle cx="44" cy="44" r="4"/>
-            <path d="M34 24l4-8h8l2 8"/>
-          </svg>
-          <span>Fotó hamarosan</span>
-        </div>
-        <div class="machine-card__body">
-          <div class="machine-badge">Nagy munkák</div>
-          <div class="machine-card__cat">Lánctalpas kotrógép · Nullafordulatos</div>
-          <h2 class="machine-card__name">Yanmar VIO 57</h2>
-          <p class="machine-card__desc">Kompakt, mégis nagytúljárású nullafordulatos lánctalpas kotrógép. A felépítmény a lánctalpak szélességén belül marad – ideális szűkebb munkaterületeken is, ahol a nagy gépek forgásteret igényelnek.</p>
-          <table class="specs-table">
-            <tr><td>Működési tömeg</td><td>5 700 kg</td></tr>
-            <tr><td>Motor teljesítmény</td><td>36,8 kW / 50 LE</td></tr>
-            <tr><td>Kanálkapacitás</td><td>0,14 – 0,21 m³</td></tr>
-            <tr><td>Max ásási mélység</td><td>3,54 m</td></tr>
-            <tr><td>Max nyújtókar hossz</td><td>5,53 m</td></tr>
-            <tr><td>Nyomtáv (szűk / széles)</td><td>1 600 / 2 000 mm</td></tr>
-            <tr><td>Talpszélesség</td><td>400 mm</td></tr>
-          </table>
-        </div>
-      </article>
-
-      <!-- VIO 17 -->
-      <article class="machine-card reveal delay-2">
-        <div class="machine-card__img">
-          <svg width="48" height="48" viewBox="0 0 56 56" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".5">
-            <rect x="8" y="22" width="22" height="16" rx="2"/>
-            <rect x="30" y="26" width="14" height="8" rx="1"/>
-            <line x1="8" y1="38" x2="44" y2="38"/>
-            <circle cx="14" cy="42" r="3.5"/><circle cx="38" cy="42" r="3.5"/>
-            <path d="M30 26l3-6h6l2 6"/>
-          </svg>
-          <span>Fotó hamarosan</span>
-        </div>
-        <div class="machine-card__body">
-          <div class="machine-badge">Szűk helyek</div>
-          <div class="machine-card__cat">Minikotrógép · Nullafordulatos</div>
-          <h2 class="machine-card__name">Yanmar VIO 17</h2>
-          <p class="machine-card__desc">990 mm-es nyomtávú minikotrógép – átfér egy standard kapun, lefér rámpán, dolgozik zárt udvarban, alagsorban. Ahol más gép megáll, a VIO 17 dolgozik tovább.</p>
-          <table class="specs-table">
-            <tr><td>Működési tömeg</td><td>1 700 kg</td></tr>
-            <tr><td>Motor teljesítmény</td><td>11,5 kW / 15,6 LE</td></tr>
-            <tr><td>Kanálkapacitás</td><td>0,034 m³</td></tr>
-            <tr><td>Max ásási mélység</td><td>2,22 m</td></tr>
-            <tr><td>Max nyújtókar hossz</td><td>3,43 m</td></tr>
-            <tr><td>Nyomtáv</td><td>990 mm</td></tr>
-            <tr><td>Kapun átfér?</td><td>Igen ✓</td></tr>
-          </table>
-        </div>
-      </article>
-
-      <!-- Billencs -->
-      <article class="machine-card reveal delay-3">
-        <div class="machine-card__img">
-          <svg width="52" height="52" viewBox="0 0 56 56" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".5">
-            <rect x="2" y="20" width="36" height="14" rx="1"/>
-            <path d="M16 20V14h28l6 6v14H38"/>
-            <circle cx="10" cy="40" r="4"/><circle cx="46" cy="40" r="4"/>
-          </svg>
-          <span>Fotó hamarosan</span>
-        </div>
-        <div class="machine-card__body">
-          <div class="machine-badge">Azonnali elszállítás</div>
-          <div class="machine-card__cat">Szállítójármű · 4×4</div>
-          <h2 class="machine-card__name">3,5t-s billencs</h2>
-          <p class="machine-card__desc">Saját billencsünkkel nincs szállításra várakozás – a kitermelés és az elszállítás egy csapatban zajlik. A munkát nem lassítja idegen fuvaros. Pécs és 40 km-es körzetben operatív.</p>
-          <table class="specs-table">
-            <tr><td>Terhelhetőség</td><td>3 500 kg</td></tr>
-            <tr><td>Platóméret</td><td>3,40 × 2,0 m</td></tr>
-            <tr><td>Meghajtás</td><td>4×4</td></tr>
-            <tr><td>Hatókör</td><td>Pécs + 40 km</td></tr>
-            <tr><td>Elérhetőség</td><td>Azonnal, kotrással</td></tr>
-          </table>
-        </div>
-      </article>
-
-    </div>
-
-    <!-- Összehasonlítás tábla -->
-    <div style="margin-top:80px" class="reveal">
-      <p class="eyebrow">Melyik gép kell?</p>
-      <h2 class="section-title" style="margin-bottom:32px">Gyors összehasonlítás</h2>
-      <div style="overflow-x:auto">
-        <table style="width:100%;border-collapse:collapse;font-size:.9rem">
-          <thead>
-            <tr style="border-bottom:2px solid var(--orange)">
-              <th style="text-align:left;padding:14px 16px 14px 0;font-family:var(--font-d);font-size:.72rem;letter-spacing:.18em;color:var(--text-dim);font-weight:600;text-transform:uppercase">Jellemző</th>
-              <th style="padding:14px 16px;font-family:var(--font-d);font-size:1rem;text-transform:uppercase;color:var(--orange)">VIO 57</th>
-              <th style="padding:14px 16px;font-family:var(--font-d);font-size:1rem;text-transform:uppercase;color:var(--orange)">VIO 17</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:13px 0;color:var(--text-dim);font-weight:300">Nagy alapásás, tereprendezés</td>
-              <td style="padding:13px 16px;text-align:center;color:var(--green);font-family:var(--font-d);font-weight:700">✓ Ideális</td>
-              <td style="padding:13px 16px;text-align:center;color:var(--text-dim)">– Korlátozott</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:13px 0;color:var(--text-dim);font-weight:300">Zárt udvar, szűk átjáró</td>
-              <td style="padding:13px 16px;text-align:center;color:var(--text-dim)">– Nem fér be</td>
-              <td style="padding:13px 16px;text-align:center;color:var(--green);font-family:var(--font-d);font-weight:700">✓ Ideális</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:13px 0;color:var(--text-dim);font-weight:300">Medenceásás (&gt; 50 m³)</td>
-              <td style="padding:13px 16px;text-align:center;color:var(--green);font-family:var(--font-d);font-weight:700">✓ Gyors</td>
-              <td style="padding:13px 16px;text-align:center;color:var(--text-dim)">– Lassabb</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:13px 0;color:var(--text-dim);font-weight:300">Rámpán le-/felszállítható</td>
-              <td style="padding:13px 16px;text-align:center;color:var(--text-dim)">Nehézkes</td>
-              <td style="padding:13px 16px;text-align:center;color:var(--green);font-family:var(--font-d);font-weight:700">✓ Igen</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:13px 0;color:var(--text-dim);font-weight:300">Sáncolás, árkolás</td>
-              <td style="padding:13px 16px;text-align:center;color:var(--green);font-family:var(--font-d);font-weight:700">✓ Igen</td>
-              <td style="padding:13px 16px;text-align:center;color:var(--green);font-family:var(--font-d);font-weight:700">✓ Igen</td>
-            </tr>
-            <tr>
-              <td style="padding:13px 0;color:var(--text-dim);font-weight:300">Max ásási mélység</td>
-              <td style="padding:13px 16px;text-align:center;font-family:var(--font-d);font-weight:700">3,54 m</td>
-              <td style="padding:13px 16px;text-align:center;font-family:var(--font-d);font-weight:700">2,22 m</td>
-            </tr>
-          </tbody>
-        </table>
+  <!-- Yanmar VIO 57 -->
+  <div class="machine-row reveal">
+    <div class="machine-row__photo" aria-label="Yanmar VIO 57 lánctalpas kotrógép">
+      <div class="machine-row__photo-ph">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="4" y="40" width="38" height="10" rx="1"/>
+          <rect x="4" y="36" width="38" height="4"/>
+          <path d="M12 36 L12 20 L26 20 L26 36"/>
+          <path d="M26 26 L44 18 L54 28 L42 34"/>
+          <path d="M42 34 L48 44"/>
+          <circle cx="11" cy="50" r="4"/>
+          <circle cx="29" cy="50" r="4"/>
+        </svg>
+        <span>VIO 57 · fotó hamarosan</span>
       </div>
     </div>
-
+    <div class="machine-row__info">
+      <span class="machine-row__badge">Nagyteljesítményű</span>
+      <h2 class="machine-row__name">YANMAR<br>VIO 57</h2>
+      <p class="machine-row__cat">Lánctalpas kotrógép · Nullafordulatos</p>
+      <p class="machine-row__when">Kompakt, mégis nagytúljárású nullafordulatos lánctalpas kotrógép. A felépítmény a lánctalpak szélességén belül marad – ideális szűkebb munkaterületeken is, ahol a nagy gépek forgásteret igényelnek.</p>
+      <table class="specs-tbl">
+        <tr><td>Működési tömeg</td><td>5 700 kg</td></tr>
+        <tr><td>Motor teljesítmény</td><td>36,8 kW / 50 LE</td></tr>
+        <tr><td>Kanálkapacitás</td><td>0,14 – 0,21 m³</td></tr>
+        <tr><td>Max ásási mélység</td><td>3,54 m</td></tr>
+        <tr><td>Max nyújtókar hossz</td><td>5,53 m</td></tr>
+        <tr><td>Nyomtáv (szűk / széles)</td><td>1 600 / 2 000 mm</td></tr>
+        <tr><td>Talpszélesség</td><td>400 mm</td></tr>
+      </table>
+    </div>
   </div>
+
+  <!-- Yanmar VIO 17 – reversed -->
+  <div class="machine-row machine-row--rev reveal">
+    <div class="machine-row__photo" aria-label="Yanmar VIO 17 minikotrógép">
+      <div class="machine-row__photo-ph">
+        <svg width="54" height="54" viewBox="0 0 54 54" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="4" y="36" width="26" height="9" rx="1"/>
+          <rect x="4" y="32" width="26" height="4"/>
+          <path d="M10 32 L10 20 L20 20 L20 32"/>
+          <path d="M20 24 L34 17 L42 25 L32 30"/>
+          <path d="M32 30 L37 40"/>
+          <circle cx="9" cy="45" r="3.5"/>
+          <circle cx="22" cy="45" r="3.5"/>
+        </svg>
+        <span>VIO 17 · fotó hamarosan</span>
+      </div>
+    </div>
+    <div class="machine-row__info">
+      <span class="machine-row__badge">Szűk helyekre</span>
+      <h2 class="machine-row__name">YANMAR<br>VIO 17</h2>
+      <p class="machine-row__cat">Minikotrógép · Nullafordulatos</p>
+      <p class="machine-row__when">990 mm-es nyomtávú minikotrógép – átfér egy standard kapun, lefér rámpán, dolgozik zárt udvarban, alagsorban. Ahol más gép megáll, a VIO 17 dolgozik tovább.</p>
+      <table class="specs-tbl">
+        <tr><td>Működési tömeg</td><td>1 700 kg</td></tr>
+        <tr><td>Motor teljesítmény</td><td>11,5 kW / 15,6 LE</td></tr>
+        <tr><td>Kanálkapacitás</td><td>0,034 m³</td></tr>
+        <tr><td>Max ásási mélység</td><td>2,22 m</td></tr>
+        <tr><td>Max nyújtókar hossz</td><td>3,43 m</td></tr>
+        <tr><td>Nyomtáv</td><td>990 mm</td></tr>
+        <tr><td>Kapun átfér?</td><td>Igen ✓</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3,5t billencs -->
+  <div class="machine-row reveal">
+    <div class="machine-row__photo" aria-label="3,5 tonnás billencs szállítójármű">
+      <div class="machine-row__photo-ph">
+        <svg width="66" height="54" viewBox="0 0 66 54" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="4" y="18" width="42" height="20" rx="1"/>
+          <path d="M4 24 L4 35 Q4 38 8 38 L42 38 Q46 38 46 35"/>
+          <rect x="46" y="22" width="14" height="16" rx="1"/>
+          <path d="M4 18 L12 12 L42 12 L46 18"/>
+          <circle cx="14" cy="44" r="5"/>
+          <circle cx="36" cy="44" r="5"/>
+          <circle cx="54" cy="44" r="4"/>
+        </svg>
+        <span>Billencs · fotó hamarosan</span>
+      </div>
+    </div>
+    <div class="machine-row__info">
+      <span class="machine-row__badge">Azonnali</span>
+      <h2 class="machine-row__name">3,5T<br>BILLENCS</h2>
+      <p class="machine-row__cat">Szállítójármű · 4×4</p>
+      <p class="machine-row__when">Saját billencsünkkel nincs szállításra várakozás – a kitermelés és az elszállítás egy csapatban zajlik. A munkát nem lassítja idegen fuvaros. Pécs és 40 km-es körzetben operatív.</p>
+      <table class="specs-tbl">
+        <tr><td>Terhelhetőség</td><td>3 500 kg</td></tr>
+        <tr><td>Platóméret</td><td>3,40 × 2,0 m</td></tr>
+        <tr><td>Meghajtás</td><td>4×4</td></tr>
+        <tr><td>Hatókör</td><td>Pécs + 40 km</td></tr>
+        <tr><td>Elérhetőség</td><td>Azonnal, kotrással</td></tr>
+      </table>
+    </div>
+  </div>
+
 </section>
 
-<!-- ══ CTA ════════════════════════════════ -->
-<section style="background:var(--dark2);border-top:1px solid var(--border);padding:80px 0">
-  <div class="container" style="text-align:center">
-    <p class="eyebrow" style="justify-content:center">Szüksége van ránk?</p>
-    <h2 class="section-title" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:20px">Kérjen árajánlatot!</h2>
-    <p style="color:var(--text-muted);font-weight:300;max-width:480px;margin:0 auto 36px">Telefonon gyorsan átbeszéljük a részleteket. Kiszállás és felmérés is lehetséges.</p>
-    <div style="display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap">
-      <a href="tel:+36309602965" class="btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-        +36 30 960 2965
-      </a>
-      <a href="index.html#kapcsolat" class="btn-ghost">Üzenet küldése <span class="arr">→</span></a>
+<!-- ══ COMPARISON TABLE ═══════════════════════ -->
+<section class="cmp-section">
+  <div class="container">
+    <span class="label reveal">Melyik gép kell?</span>
+    <h2 class="reveal d1">GYORS<br>ÖSSZEHASONLÍTÁS</h2>
+    <div style="overflow-x:auto" class="reveal d2">
+      <table class="cmp-tbl">
+        <thead>
+          <tr>
+            <th>Feladat</th>
+            <th>VIO 57</th>
+            <th>VIO 17</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nagy alapásás, tereprendezés</td>
+            <td><span class="cmp-check">✓ Ideális</span></td>
+            <td><span class="cmp-no">– Korlátozott</span></td>
+          </tr>
+          <tr>
+            <td>Zárt udvar, szűk átjáró</td>
+            <td><span class="cmp-no">– Nem fér be</span></td>
+            <td><span class="cmp-check">✓ Ideális</span></td>
+          </tr>
+          <tr>
+            <td>Medenceásás (&gt; 50 m³)</td>
+            <td><span class="cmp-check">✓ Gyors</span></td>
+            <td><span class="cmp-no">– Lassabb</span></td>
+          </tr>
+          <tr>
+            <td>Rámpán le-/felszállítható</td>
+            <td><span class="cmp-no">Nehézkes</span></td>
+            <td><span class="cmp-check">✓ Igen</span></td>
+          </tr>
+          <tr>
+            <td>Sáncolás, árkolás</td>
+            <td><span class="cmp-check">✓ Igen</span></td>
+            <td><span class="cmp-check">✓ Igen</span></td>
+          </tr>
+          <tr>
+            <td>Max ásási mélység</td>
+            <td><span class="cmp-val">3,54 m</span></td>
+            <td><span class="cmp-val">2,22 m</span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
 
-<!-- ══ FOOTER ═════════════════════════════ -->
+<!-- ══ BOTTOM CTA ══════════════════════════════ -->
+<section class="gpk-cta">
+  <div class="container gpk-cta__inner">
+    <div class="gpk-cta__text reveal">
+      <span class="label" style="margin-bottom:12px">Szüksége van ránk?</span>
+      <h2>KÉRJEN ÁRAJÁNLATOT</h2>
+      <p>Telefonon gyorsan átbeszéljük a részleteket. Kiszállás és felmérés is lehetséges.</p>
+    </div>
+    <div class="gpk-cta__btns reveal d1">
+      <a href="tel:+36309602965" class="btn btn--solid">+36 30 960 2965</a>
+      <a href="index.html#kapcsolat" class="btn btn--border-white">Üzenet küldése <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════ -->
 <footer class="footer">
   <div class="container footer__inner">
     <div>
-      <div class="footer__logo">KOTRÓ<span class="sep">|</span>BÁZIS</div>
-      <div class="footer__copy">© 2025 KotróBázis – Piry Dávid e.v. · kotrobazis.hu</div>
+      <div class="footer__logo">KOTRÓ<span class="sep"></span>BÁZIS</div>
+      <p class="footer__copy">© 2025 KotróBázis – Piry Dávid. Minden jog fenntartva.</p>
     </div>
-    <ul class="footer__links">
-      <li><a href="tereprendezes.html">Tereprendezés</a></li>
-      <li><a href="medenceasas.html">Medenceásás</a></li>
-      <li><a href="gepek.html">Gépek</a></li>
-      <li><a href="index.html#kapcsolat">Kapcsolat</a></li>
-    </ul>
+    <nav class="footer__links" aria-label="Gyorslinkek">
+      <a href="index.html#gepek">Géppark</a>
+      <a href="index.html#szolgaltatasok">Szolgáltatások</a>
+      <a href="tereprendezes.html">Tereprendezés</a>
+      <a href="medenceasas.html">Medenceásás</a>
+      <a href="index.html#kapcsolat">Kapcsolat</a>
+    </nav>
   </div>
 </footer>
 
