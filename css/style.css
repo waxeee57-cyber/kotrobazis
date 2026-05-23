@@ -1270,3 +1270,51 @@ textarea.form-ctrl { resize: vertical; min-height: 100px; }
   .hero__panel-title { font-size: clamp(48px, 20vw, 80px); }
   .machines__intro { padding: 64px 0 40px; }
 }
+
+/* ── Kalkulátor szín javítások ─────────────
+   !important szükséges az örökléses konfliktusok
+   és a böngészők eltérő select/option kezelése miatt
+─────────────────────────────────────────── */
+#kalkulator {
+  background: #0A0A0A !important;
+  color: #F5F0E8 !important;
+}
+#kalkulator .label {
+  color: #E8720C !important;
+}
+#kalkulator .kalk__title {
+  color: #FFFFFF !important;
+}
+#kalkulator p,
+#kalkulator .kalk__disclaimer {
+  color: #999999 !important;
+}
+#kalkulator .form-label {
+  color: #888888 !important;
+}
+#kalkulator .form-ctrl {
+  background: #1A1A1A !important;
+  color: #FFFFFF !important;
+  border-color: #333333 !important;
+}
+#kalkulator select option {
+  background: #161616 !important;
+  color: #FFFFFF !important;
+}
+#kalkulator .form-ctrl:focus {
+  border-color: #E8720C !important;
+  outline: none !important;
+}
+#kalk-output {
+  color: #FFFFFF !important;
+}
+#kalk-output .kalk__num {
+  color: #E8720C !important;
+}
+#kalk-output .kalk__sub {
+  color: #666666 !important;
+}
+#kalk-output .kalk__warning {
+  color: #E8720C !important;
+  background: rgba(232,114,12,0.1) !important;
+}
