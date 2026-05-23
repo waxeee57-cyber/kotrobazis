@@ -1063,6 +1063,107 @@ textarea.form-ctrl { resize: vertical; min-height: 100px; }
 }
 
 /* ═══════════════════════════════════════════
+   CALCULATOR – Kötetszámító
+═══════════════════════════════════════════ */
+.kalk {
+  background: #0A0A0A;
+  color: var(--ow);
+  padding: 100px 0;
+}
+.kalk .label { margin-bottom: 14px; }
+.kalk__title {
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  color: var(--ow);
+  margin-bottom: 40px;
+}
+.kalk__wrap {
+  background: #161616;
+  border: 1px solid #2A2A2A;
+}
+.kalk__inputs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 36px 36px 32px;
+}
+.kalk .form-label { color: rgba(245,240,232,0.38); }
+.kalk .form-ctrl {
+  background: #1F1F1F;
+  border-color: #2A2A2A;
+  color: var(--ow);
+}
+.kalk .form-ctrl:focus { border-color: var(--orange); }
+.kalk__output {
+  border-top: 1px solid #2A2A2A;
+  padding: 32px 36px 36px;
+}
+.kalk__out-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 48px;
+  margin-bottom: 28px;
+}
+.kalk__stat { display: flex; flex-direction: column; gap: 8px; }
+.kalk__num {
+  font-family: var(--font-d);
+  font-weight: 900;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: var(--orange);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.kalk__sub {
+  font-family: var(--font-d);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.32);
+}
+.kalk__badge {
+  display: inline-block;
+  background: var(--orange);
+  color: #000;
+  font-family: var(--font-d);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  align-self: flex-start;
+  line-height: 1.4;
+}
+.kalk__warning {
+  background: rgba(232,114,12,0.09);
+  border-left: 3px solid var(--orange);
+  color: var(--orange);
+  font-size: 0.82rem;
+  font-family: var(--font-d);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+}
+.kalk__disclaimer {
+  font-size: 0.78rem;
+  color: rgba(245,240,232,0.24);
+  font-weight: 300;
+  line-height: 1.85;
+  margin-bottom: 24px;
+  max-width: 620px;
+}
+.kalk__cta { align-self: flex-start; }
+
+@media (max-width: 1023px) {
+  .kalk__inputs { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 767px) {
+  .kalk { padding: 72px 0; }
+  .kalk__inputs { grid-template-columns: 1fr; padding: 24px 20px 20px; }
+  .kalk__output { padding: 24px 20px; }
+  .kalk__out-grid { grid-template-columns: 1fr 1fr; gap: 20px 24px; }
+}
+
+/* ═══════════════════════════════════════════
    ADMIN PANEL  (unchanged)
 ═══════════════════════════════════════════ */
 .adm-body { background: #0E0E0E; color: #F0EDE8; min-height: 100vh; font-family: var(--font-b); }

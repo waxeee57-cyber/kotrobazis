@@ -512,6 +512,78 @@
   </div>
 </section>
 
+<!-- ══ CALCULATOR ════════════════════════════ -->
+<section class="kalk" id="kalkulator" aria-label="Kötetszámító kalkulátor">
+  <div class="container">
+    <span class="label reveal">Kalkulátor</span>
+    <h2 class="kalk__title reveal d1">Kötetszámító</h2>
+    <div class="kalk__wrap reveal d2">
+
+      <div class="kalk__inputs">
+        <div class="form-group">
+          <label class="form-label" for="kalk-terulet">Terület (m²)</label>
+          <input class="form-ctrl" type="number" id="kalk-terulet" name="terulet"
+                 min="1" max="9999" step="1" placeholder="pl. 50">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="kalk-melyseg">Mélység</label>
+          <select class="form-ctrl" id="kalk-melyseg" name="melyseg">
+            <option value="">Válasszon...</option>
+            <option value="0.5">0,5 m</option>
+            <option value="1.0">1,0 m</option>
+            <option value="1.5">1,5 m</option>
+            <option value="2.0">2,0 m</option>
+            <option value="2.1">2,1 m (VIO 17 maximum)</option>
+            <option value="2.5">2,5 m</option>
+            <option value="3.0">3,0 m</option>
+            <option value="3.5">3,5 m</option>
+            <option value="3.9">3,9 m (VIO 57 maximum)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="kalk-talaj">Talaj típusa</label>
+          <select class="form-ctrl" id="kalk-talaj" name="talaj">
+            <option value="laza">Laza föld, humusz</option>
+            <option value="agyag">Agyagos, kötött talaj</option>
+            <option value="kooves">Köves, kemény talaj</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="kalk__output" id="kalk-output" hidden>
+        <div class="kalk__out-grid">
+          <div class="kalk__stat">
+            <span class="kalk__num" id="kalk-kobm">—</span>
+            <span class="kalk__sub">m³ kitermelendő</span>
+          </div>
+          <div class="kalk__stat">
+            <span class="kalk__num" id="kalk-ido">—</span>
+            <span class="kalk__sub">becsült munkaidő</span>
+          </div>
+          <div class="kalk__stat">
+            <span class="kalk__num" id="kalk-bill">—</span>
+            <span class="kalk__sub">billencs forduló</span>
+          </div>
+          <div class="kalk__stat">
+            <span class="kalk__badge" id="kalk-gep">—</span>
+            <span class="kalk__sub">ajánlott gép</span>
+          </div>
+        </div>
+        <div class="kalk__warning" id="kalk-warn" hidden>
+          ⚠ Ennél a mélységnél csak a VIO 57 alkalmazható
+        </div>
+        <p class="kalk__disclaimer">
+          Tájékoztató becslés laza talajon mérve.<br>
+          A tényleges idő függ a helyszín körülményeitől, megközelítéstől és a talaj
+          pontos állapotától. Pontos ajánlathoz hívjon minket.
+        </p>
+        <a href="#kapcsolat" class="btn btn--solid kalk__cta">Ajánlatot kérek erre a munkára <span class="arr">→</span></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ══ CONTACT ════════════════════════════════ -->
 <section class="contact" id="kapcsolat" aria-label="Kapcsolatfelvétel">
   <div class="container">

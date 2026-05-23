@@ -146,6 +146,70 @@
   });
 })();
 
+/* ── Kötetszámító kalkulátor ─────────────── */
+(function () {
+  const KAPACITAS = {
+    VIO17: { min: 8,  max: 12 },
+    VIO57: { min: 18, max: 26 }
+  };
+  const TALAJ = {
+    laza:   { szorzo: 1.0  },
+    agyag:  { szorzo: 1.25 },
+    kooves: { szorzo: 1.6  }
+  };
+
+  function melysegFaktor(melyseg, maxMelyseg) {
+    const arany = melyseg / maxMelyseg;
+    if (arany <= 0.4) return 1.0;
+    if (arany <= 0.7) return 1.15;
+    return 1.35;
+  }
+
+  const terEl  = document.getElementById('kalk-terulet');
+  const melEl  = document.getElementById('kalk-melyseg');
+  const talEl  = document.getElementById('kalk-talaj');
+  const outEl  = document.getElementById('kalk-output');
+  const kobmEl = document.getElementById('kalk-kobm');
+  const idoEl  = document.getElementById('kalk-ido');
+  const billEl = document.getElementById('kalk-bill');
+  const gepEl  = document.getElementById('kalk-gep');
+  const warnEl = document.getElementById('kalk-warn');
+
+  if (!terEl) return;
+
+  function szamol() {
+    const terulet = parseFloat(terEl.value) || 0;
+    const melyseg = parseFloat(melEl.value) || 0;
+    const talajTipus = talEl.value;
+
+    if (terulet <= 0 || melyseg <= 0) { outEl.hidden = true; return; }
+
+    const kobmeter = terulet * melyseg;
+    const gepTipus = (melyseg > 2.1) ? 'VIO57' :
+                     (kobmeter < 25)  ? 'VIO17' : 'VIO57';
+
+    const talajSz   = TALAJ[talajTipus].szorzo;
+    const maxMely   = (gepTipus === 'VIO17') ? 2.1 : 3.9;
+    const melyFak   = melysegFaktor(melyseg, maxMely);
+    const effMin    = KAPACITAS[gepTipus].min / (talajSz * melyFak);
+    const effMax    = KAPACITAS[gepTipus].max / (talajSz * melyFak);
+
+    const oraMinR = Math.ceil((kobmeter / effMax) * 2) / 2;
+    const oraMaxR = Math.ceil((kobmeter / effMin) * 2) / 2;
+
+    const billFord = Math.ceil((kobmeter * 1.25) / 3.5);
+
+    kobmEl.textContent = '~' + Math.round(kobmeter) + ' m³';
+    idoEl.textContent  = oraMinR + '–' + oraMaxR + ' óra';
+    billEl.textContent = '~' + billFord + ' forduló';
+    gepEl.textContent  = 'Yanmar ' + gepTipus.replace('VIO', 'VIO ');
+    warnEl.hidden      = melyseg <= 2.1;
+    outEl.hidden       = false;
+  }
+
+  [terEl, melEl, talEl].forEach(el => el.addEventListener('input', szamol));
+})();
+
 /* ── Utility ─────────────────────────────── */
 function esc(s) {
   return String(s ?? '')
