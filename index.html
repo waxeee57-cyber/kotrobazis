@@ -541,76 +541,173 @@
 </section>
 
 <!-- ══ CALCULATOR ════════════════════════════ -->
-<section class="kalk" id="kalkulator" aria-label="Kötetszámító kalkulátor">
-  <div class="container">
-    <span class="label reveal">Kalkulátor</span>
-    <h2 class="kalk__title reveal d1">Kötetszámító</h2>
-    <div class="kalk__wrap">
+<section id="kalkulator" style="background:#F5F0E8; padding:80px 5vw;">
+  <div style="max-width:900px; margin:0 auto;">
+    <p style="color:#E8720C; font-size:0.7rem; font-weight:700;
+       letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.5rem;">
+      KALKULÁTOR
+    </p>
+    <h2 style="font-family:'Barlow Condensed',sans-serif; font-weight:900;
+       font-size:3rem; text-transform:uppercase; color:#0A0A0A;
+       margin-bottom:2rem;">
+      Kötetszámító
+    </h2>
 
-      <div class="kalk__inputs">
-        <div class="form-group">
-          <label class="form-label" for="kalk-terulet">Terület (m²)</label>
-          <input class="form-ctrl" type="number" id="kalk-terulet" name="terulet"
-                 min="1" max="9999" step="1" placeholder="pl. 50">
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="kalk-melyseg">Mélység</label>
-          <select class="form-ctrl" id="kalk-melyseg" name="melyseg">
-            <option value="">Válasszon...</option>
-            <option value="0.5">0,5 m</option>
-            <option value="1.0">1,0 m</option>
-            <option value="1.5">1,5 m</option>
-            <option value="2.0">2,0 m</option>
-            <option value="2.1">2,1 m (VIO 17 maximum)</option>
-            <option value="2.5">2,5 m</option>
-            <option value="3.0">3,0 m</option>
-            <option value="3.5">3,5 m</option>
-            <option value="3.9">3,9 m (VIO 57 maximum)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="kalk-talaj">Talaj típusa</label>
-          <select class="form-ctrl" id="kalk-talaj" name="talaj">
-            <option value="laza">Laza föld, humusz</option>
-            <option value="agyag">Agyagos, kötött talaj</option>
-            <option value="kooves">Köves, kemény talaj</option>
-          </select>
-        </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr;
+       gap:1.5rem; margin-bottom:2rem;">
+
+      <div>
+        <label style="display:block; font-size:0.72rem; font-weight:600;
+           letter-spacing:0.12em; text-transform:uppercase; color:#666;
+           margin-bottom:0.5rem;">
+          Terület (m²)
+        </label>
+        <input id="k-terulet" type="number" min="1" max="9999"
+           placeholder="pl. 50"
+           style="width:100%; background:#fff; border:1px solid #ccc;
+           color:#0A0A0A; font-family:'Barlow',sans-serif; font-size:1rem;
+           padding:0.75rem 1rem; box-sizing:border-box; outline:none;">
       </div>
 
-      <div class="kalk__output" id="kalk-output" hidden>
-        <div class="kalk__out-grid">
-          <div class="kalk__stat">
-            <span class="kalk__num" id="kalk-kobm">—</span>
-            <span class="kalk__sub">m³ kitermelendő</span>
-          </div>
-          <div class="kalk__stat">
-            <span class="kalk__num" id="kalk-ido">—</span>
-            <span class="kalk__sub">becsült munkaidő</span>
-          </div>
-          <div class="kalk__stat">
-            <span class="kalk__num" id="kalk-bill">—</span>
-            <span class="kalk__sub">billencs forduló</span>
-          </div>
-          <div class="kalk__stat">
-            <span class="kalk__badge" id="kalk-gep">—</span>
-            <span class="kalk__sub">ajánlott gép</span>
-          </div>
-        </div>
-        <div class="kalk__warning" id="kalk-warn" hidden>
-          ⚠ Ennél a mélységnél csak a VIO 57 alkalmazható
-        </div>
-        <p class="kalk__disclaimer">
-          Tájékoztató becslés laza talajon mérve.<br>
-          A tényleges idő függ a helyszín körülményeitől, megközelítéstől és a talaj
-          pontos állapotától. Pontos ajánlathoz hívjon minket.
-        </p>
-        <a href="#kapcsolat" class="btn btn--solid kalk__cta">Ajánlatot kérek erre a munkára <span class="arr">→</span></a>
+      <div>
+        <label style="display:block; font-size:0.72rem; font-weight:600;
+           letter-spacing:0.12em; text-transform:uppercase; color:#666;
+           margin-bottom:0.5rem;">
+          Mélység
+        </label>
+        <select id="k-melyseq"
+           style="width:100%; background:#fff; border:1px solid #ccc;
+           color:#0A0A0A; font-family:'Barlow',sans-serif; font-size:1rem;
+           padding:0.75rem 1rem; box-sizing:border-box; outline:none;
+           appearance:none; cursor:pointer;">
+          <option value="">Válasszon...</option>
+          <option value="0.5">0,5 m</option>
+          <option value="1.0">1,0 m</option>
+          <option value="1.5">1,5 m</option>
+          <option value="2.0">2,0 m</option>
+          <option value="2.1">2,1 m (VIO 17 max)</option>
+          <option value="2.5">2,5 m</option>
+          <option value="3.0">3,0 m</option>
+          <option value="3.5">3,5 m</option>
+          <option value="3.9">3,9 m (VIO 57 max)</option>
+        </select>
+      </div>
+
+      <div>
+        <label style="display:block; font-size:0.72rem; font-weight:600;
+           letter-spacing:0.12em; text-transform:uppercase; color:#666;
+           margin-bottom:0.5rem;">
+          Talaj típusa
+        </label>
+        <select id="k-talaj"
+           style="width:100%; background:#fff; border:1px solid #ccc;
+           color:#0A0A0A; font-family:'Barlow',sans-serif; font-size:1rem;
+           padding:0.75rem 1rem; box-sizing:border-box; outline:none;
+           appearance:none; cursor:pointer;">
+          <option value="laza">Laza föld, humusz</option>
+          <option value="agyag">Agyagos, kötött talaj</option>
+          <option value="kooves">Köves, kemény talaj</option>
+        </select>
       </div>
 
     </div>
+
+    <div id="k-output" style="display:none; border-top:1px solid #ccc;
+       padding-top:2rem;">
+
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr;
+         gap:1.5rem; margin-bottom:1.5rem;">
+        <div style="border-left:3px solid #E8720C; padding-left:1rem;">
+          <div id="k-kobmeter" style="font-family:'Barlow Condensed',sans-serif;
+             font-size:2.5rem; font-weight:900; color:#E8720C;">—</div>
+          <div style="font-size:0.7rem; text-transform:uppercase;
+             letter-spacing:0.1em; color:#888; margin-top:0.25rem;">
+             Köbméter</div>
+        </div>
+        <div style="border-left:3px solid #E8720C; padding-left:1rem;">
+          <div id="k-ora" style="font-family:'Barlow Condensed',sans-serif;
+             font-size:2.5rem; font-weight:900; color:#0A0A0A;">—</div>
+          <div style="font-size:0.7rem; text-transform:uppercase;
+             letter-spacing:0.1em; color:#888; margin-top:0.25rem;">
+             Becsült idő</div>
+        </div>
+        <div style="border-left:3px solid #E8720C; padding-left:1rem;">
+          <div id="k-billencs" style="font-family:'Barlow Condensed',sans-serif;
+             font-size:2.5rem; font-weight:900; color:#0A0A0A;">—</div>
+          <div style="font-size:0.7rem; text-transform:uppercase;
+             letter-spacing:0.1em; color:#888; margin-top:0.25rem;">
+             Billencs forduló</div>
+        </div>
+        <div style="border-left:3px solid #E8720C; padding-left:1rem;">
+          <div id="k-gep" style="font-family:'Barlow Condensed',sans-serif;
+             font-size:1.4rem; font-weight:900; color:#0A0A0A;
+             line-height:1.2;">—</div>
+          <div style="font-size:0.7rem; text-transform:uppercase;
+             letter-spacing:0.1em; color:#888; margin-top:0.25rem;">
+             Ajánlott gép</div>
+        </div>
+      </div>
+
+      <div id="k-warning" style="display:none; color:#E8720C;
+         font-size:0.85rem; margin-bottom:1rem;">
+        ⚠ Ennél a mélységnél csak a VIO 57 alkalmazható
+      </div>
+
+      <p style="color:#888; font-size:0.78rem; font-style:italic;
+         margin-bottom:1.5rem;">
+        Tájékoztató becslés. A tényleges idő függ a helyszín
+        körülményeitől és a talaj pontos állapotától.
+        Pontos ajánlathoz hívjon minket.
+      </p>
+
+      <a href="#kapcsolat" style="display:inline-block; background:#E8720C;
+         color:#000; font-family:'Barlow Condensed',sans-serif;
+         font-weight:700; font-size:1rem; letter-spacing:0.1em;
+         text-transform:uppercase; padding:1rem 2rem;
+         text-decoration:none;">
+        Ajánlatot kérek erre a munkára →
+      </a>
+    </div>
   </div>
 </section>
+
+<script>
+(function() {
+  var TALAJ = { laza: 1.0, agyag: 1.25, kooves: 1.6 };
+
+  function szamol() {
+    var terulet = parseFloat(document.getElementById('k-terulet').value);
+    var melyseq = parseFloat(document.getElementById('k-melyseq').value);
+    var talaj   = document.getElementById('k-talaj').value;
+    var output  = document.getElementById('k-output');
+
+    if (!terulet || !melyseq || terulet <= 0) {
+      output.style.display = 'none';
+      return;
+    }
+
+    var kobmeter = terulet * melyseq;
+    var gepTipus = melyseq > 2.1 ? 'VIO57' : (kobmeter < 25 ? 'VIO17' : 'VIO57');
+    var kapMin   = gepTipus === 'VIO57' ? 18 : 8;
+    var kapMax   = gepTipus === 'VIO57' ? 26 : 12;
+    var sz       = TALAJ[talaj] || 1.0;
+    var oraMin   = Math.ceil((kobmeter / (kapMax / sz)) * 2) / 2;
+    var oraMax   = Math.ceil((kobmeter / (kapMin / sz)) * 2) / 2;
+    var billencs = Math.ceil((kobmeter * 1.25) / 3.5);
+
+    document.getElementById('k-kobmeter').textContent = '~' + Math.round(kobmeter) + ' m³';
+    document.getElementById('k-ora').textContent      = oraMin + '–' + oraMax + ' óra';
+    document.getElementById('k-billencs').textContent = '~' + billencs + ' menet';
+    document.getElementById('k-gep').textContent      = 'Yanmar ' + gepTipus;
+    document.getElementById('k-warning').style.display = melyseq > 2.1 ? 'block' : 'none';
+    output.style.display = 'block';
+  }
+
+  document.getElementById('k-terulet').addEventListener('input',  szamol);
+  document.getElementById('k-melyseq').addEventListener('change', szamol);
+  document.getElementById('k-talaj').addEventListener('change',   szamol);
+})();
+</script>
 
 <!-- ══ CONTACT ════════════════════════════════ -->
 <section class="contact" id="kapcsolat" aria-label="Kapcsolatfelvétel">
