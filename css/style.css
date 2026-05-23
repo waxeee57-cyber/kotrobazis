@@ -231,6 +231,7 @@ ul { list-style: none; }
 }
 .nav__drawer a:last-of-type { border-bottom: none; }
 .nav__drawer a:hover { color: var(--ow); }
+.nav__drawer a.active { color: var(--orange); }
 
 /* ═══════════════════════════════════════════
    HERO – SPLIT 60 / 40

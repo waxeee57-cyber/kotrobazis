@@ -3,7 +3,7 @@
    Vanilla JS, zero dependencies
 ═══════════════════════════════════════════ */
 
-/* ── Nav: scroll class + hamburger ──────── */
+/* ── Nav: scroll class + hamburger + active highlight ── */
 (function () {
   const nav    = document.querySelector('.nav');
   const burger = document.querySelector('.nav__burger');
@@ -22,14 +22,43 @@
       burger.setAttribute('aria-expanded', String(open));
       document.body.style.overflow = open ? 'hidden' : '';
     });
-    drawer.querySelectorAll('a').forEach(a =>
-      a.addEventListener('click', () => {
+
+    drawer.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const href = a.getAttribute('href') || '';
+        const isAnchor = href.startsWith('#');
+        if (isAnchor) e.preventDefault();
+
         burger.classList.remove('open');
         drawer.classList.remove('open');
         burger.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
-      })
-    );
+
+        if (isAnchor) {
+          const target = document.querySelector(href);
+          if (target) setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 50);
+        }
+      });
+    });
+
+    /* Scroll-based active highlight – 30% section visibility */
+    const drawerLinks = Array.from(drawer.querySelectorAll('a[href^="#"]'));
+    const sectionMap  = new Map();
+    drawerLinks.forEach(a => {
+      const sec = document.querySelector(a.getAttribute('href'));
+      if (sec) sectionMap.set(sec, a);
+    });
+
+    if (sectionMap.size) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const link = sectionMap.get(entry.target);
+          if (link) link.classList.toggle('active', entry.isIntersecting);
+        });
+      }, { threshold: 0.3 });
+
+      sectionMap.forEach((_, sec) => io.observe(sec));
+    }
   }
 })();
 
