@@ -69,11 +69,16 @@
   load().then(refs => render(refs.slice(0, 6)))
         .catch(() => render([]));
 
-  /* aspect-ratio classes cycle: tall → sq → wide */
   const aspectCycle = ['ref-item--tall', 'ref-item--sq', 'ref-item--wide'];
 
   function render(refs) {
-    if (!refs.length) {
+    /* Filter out pure placeholders where title/cim is empty or "Hamarosan" */
+    const visible = refs.filter(r => {
+      const name = r.cim || r.title || '';
+      return name && name !== 'Hamarosan';
+    });
+
+    if (!visible.length) {
       grid.innerHTML = `
         <div class="refs__empty">
           <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -86,26 +91,38 @@
       return;
     }
 
-    grid.innerHTML = refs.map((r, i) => {
+    grid.innerHTML = visible.map((r, i) => {
       const aspect = aspectCycle[i % aspectCycle.length];
-      const imgHtml = r.photo
-        ? `<img src="${esc(r.photo)}" alt="${esc(r.title)}" loading="lazy">`
+      /* Support both old field names (title/photo/category/location/year)
+         and new Hungarian names (cim/kep/kategoria/helyszin/ev) */
+      const img  = r.kep      || r.photo    || '';
+      const name = r.cim      || r.title    || '';
+      const cat  = r.kategoria|| r.category || '';
+      const loc  = r.helyszin || r.location || '';
+      const yr   = r.ev       || r.year     || '';
+
+      const imgHtml = img
+        ? `<img src="${esc(img)}" alt="${esc(name)}" loading="lazy">`
         : `<div class="ref-item__ph">
-             <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.2">
-               <rect x="2" y="2" width="22" height="22" rx="1"/>
-               <path d="M2 17 L8 11 L13 15 L18 9 L24 15"/>
-               <circle cx="8" cy="8" r="2"/>
+             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#8A8075" stroke-width="1.5">
+               <rect x="3" y="32" width="24" height="7" rx="1"/>
+               <rect x="3" y="29" width="24" height="3"/>
+               <path d="M8 29 L8 18 L18 18 L18 29"/>
+               <path d="M18 22 L28 15 L34 21 L26 25"/>
+               <path d="M26 25 L30 32"/>
+               <circle cx="7" cy="39" r="3"/>
+               <circle cx="19" cy="39" r="3"/>
              </svg>
-             <span>Fotó hamarosan</span>
+             <span style="font-size:11px;color:#8A8075;letter-spacing:0.14em;text-transform:uppercase;">Fotó hamarosan</span>
            </div>`;
       return `
         <div class="ref-item ${aspect} reveal">
           ${imgHtml}
           <div class="ref-item__over">
             <div class="ref-item__txt">
-              <span class="ref-item__cat">${esc(r.category)}</span>
-              <p class="ref-item__name">${esc(r.title)}</p>
-              <span class="ref-item__loc">${esc(r.location)} · ${r.year}</span>
+              <span class="ref-item__cat">${esc(cat)}</span>
+              <p class="ref-item__name">${esc(name)}</p>
+              <span class="ref-item__loc">${esc(loc)}${yr ? ' · ' + yr : ''}</span>
             </div>
           </div>
         </div>`;
@@ -115,34 +132,44 @@
   }
 })();
 
-/* ── Contact form ────────────────────────── */
+/* ── Contact form – Formspree AJAX ──────── */
 (function () {
-  const form   = document.getElementById('contact-form');
-  const status = document.getElementById('form-status');
+  const form    = document.getElementById('contact-form');
+  const success = document.getElementById('form-success');
+  const status  = document.getElementById('form-status');
   if (!form) return;
 
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn  = form.querySelector('.btn-submit');
     const orig = btn.textContent;
 
-    btn.textContent         = 'Köszönjük! Hamarosan hívjuk.';
-    btn.style.background    = '#2D9B6F';
-    btn.style.pointerEvents = 'none';
+    btn.disabled    = true;
+    btn.textContent = 'Küldés...';
+    if (status) status.style.display = 'none';
 
-    if (status) {
-      status.style.display = 'block';
-      status.style.color   = '#2D9B6F';
-      status.textContent   = 'Üzenetét megkaptuk – általában 1 munkanapon belül visszahívjuk.';
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        form.style.display = 'none';
+        if (success) success.style.display = 'block';
+      } else {
+        throw new Error('server');
+      }
+    } catch {
+      btn.disabled    = false;
+      btn.textContent = orig;
+      if (status) {
+        status.style.display = 'block';
+        status.style.color   = '#E05252';
+        status.textContent   = 'Hiba történt. Kérem hívjon minket: +36 30 960 2965';
+      }
     }
-
-    setTimeout(() => {
-      btn.textContent         = orig;
-      btn.style.background    = '';
-      btn.style.pointerEvents = '';
-      if (status) status.style.display = 'none';
-      form.reset();
-    }, 5000);
   });
 })();
 
@@ -178,8 +205,8 @@
   if (!terEl) return;
 
   function szamol() {
-    const terulet = parseFloat(terEl.value) || 0;
-    const melyseg = parseFloat(melEl.value) || 0;
+    const terulet    = parseFloat(terEl.value) || 0;
+    const melyseg    = parseFloat(melEl.value) || 0;
     const talajTipus = talEl.value;
 
     if (terulet <= 0 || melyseg <= 0) { outEl.hidden = true; return; }
@@ -188,26 +215,34 @@
     const gepTipus = (melyseg > 2.1) ? 'VIO57' :
                      (kobmeter < 25)  ? 'VIO17' : 'VIO57';
 
-    const talajSz   = TALAJ[talajTipus].szorzo;
-    const maxMely   = (gepTipus === 'VIO17') ? 2.1 : 3.9;
-    const melyFak   = melysegFaktor(melyseg, maxMely);
-    const effMin    = KAPACITAS[gepTipus].min / (talajSz * melyFak);
-    const effMax    = KAPACITAS[gepTipus].max / (talajSz * melyFak);
+    const talajSz = TALAJ[talajTipus].szorzo;
+    const maxMely = (gepTipus === 'VIO17') ? 2.1 : 3.9;
+    const melyFak = melysegFaktor(melyseg, maxMely);
+    const effMin  = KAPACITAS[gepTipus].min / (talajSz * melyFak);
+    const effMax  = KAPACITAS[gepTipus].max / (talajSz * melyFak);
 
     const oraMinR = Math.ceil((kobmeter / effMax) * 2) / 2;
     const oraMaxR = Math.ceil((kobmeter / effMin) * 2) / 2;
-
     const billFord = Math.ceil((kobmeter * 1.25) / 3.5);
 
     kobmEl.textContent = '~' + Math.round(kobmeter) + ' m³';
-    idoEl.textContent  = oraMinR + '–' + oraMaxR + ' óra';
+    idoEl.textContent  = 'Becsült idő: ' + oraMinR + '–' + oraMaxR + ' óra';
     billEl.textContent = '~' + billFord + ' forduló';
-    gepEl.textContent  = 'Yanmar ' + gepTipus.replace('VIO', 'VIO ');
+    gepEl.textContent  = 'Ajánlott gép: Yanmar ' + gepTipus.replace('VIO', 'VIO ');
     warnEl.hidden      = melyseg <= 2.1;
     outEl.hidden       = false;
   }
 
-  [terEl, melEl, talEl].forEach(el => el.addEventListener('input', szamol));
+  /* 'input' for number field, 'change' for selects */
+  terEl.addEventListener('input',  szamol);
+  melEl.addEventListener('change', szamol);
+  talEl.addEventListener('change', szamol);
+})();
+
+/* ── Footer évszám ───────────────────────── */
+(function () {
+  const el = document.getElementById('footer-year');
+  if (el) el.textContent = new Date().getFullYear();
 })();
 
 /* ── Utility ─────────────────────────────── */

@@ -1318,3 +1318,7 @@ textarea.form-ctrl { resize: vertical; min-height: 100px; }
   color: #E8720C !important;
   background: rgba(232,114,12,0.1) !important;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track { animation: none; white-space: normal; padding: 0.5rem 2rem; }
+}
