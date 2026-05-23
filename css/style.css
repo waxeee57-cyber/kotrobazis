@@ -1323,6 +1323,34 @@ textarea.form-ctrl { resize: vertical; min-height: 100px; }
   background: rgba(232,114,12,0.1) !important;
 }
 
+/* ── Kalkulator input grid – always visible, never reveal-hidden ── */
+.kalk__inputs {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+@media (min-width: 1024px) {
+  .kalk__inputs {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+.kalk__inputs .form-group {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.kalk__inputs .form-ctrl,
+.kalk__inputs select,
+.kalk__inputs input {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ticker__track { animation: none; white-space: normal; padding: 0.5rem 2rem; }
 }
