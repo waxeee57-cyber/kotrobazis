@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin – KotróBázis</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="adm-body">
+
+<!-- ══ TOAST ══════════════════════════════ -->
+<div class="adm-toast" id="toast"></div>
+
+<!-- ══ LOGIN ══════════════════════════════ -->
+<div id="login-screen" class="adm-login">
+  <div class="adm-login__box">
+    <div class="adm-login__logo">KOTRÓ<span class="sep">|</span>BÁZIS</div>
+    <div class="adm-login__sub">Admin panel</div>
+    <div class="adm-login__err" id="login-err">Hibás jelszó.</div>
+    <div class="form-group">
+      <label class="form-label" for="pw">Jelszó</label>
+      <input class="form-ctrl" type="password" id="pw" placeholder="••••••••••••" autocomplete="current-password">
+    </div>
+    <button class="btn-adm" style="width:100%" onclick="doLogin()">Belépés</button>
+  </div>
+</div>
+
+<!-- ══ DASHBOARD ══════════════════════════ -->
+<div id="dashboard" style="display:none">
+
+  <!-- Nav -->
+  <nav class="adm-nav">
+    <div style="display:flex;align-items:center;gap:16px">
+      <a href="../index.html" class="adm-nav__logo">KOTRÓ<span class="sep">|</span>BÁZIS</a>
+      <span class="adm-nav__badge">Admin</span>
+    </div>
+    <div class="adm-nav__right">
+      <a href="../index.html" class="btn-adm-sec" style="text-decoration:none">← Weboldalra</a>
+      <button class="btn-logout" onclick="logout()">Kilépés</button>
+    </div>
+  </nav>
+
+  <main class="adm-main">
+    <!-- Tabs -->
+    <div class="adm-tabs">
+      <button class="adm-tab active" onclick="switchTab('refs', this)">Referenciák</button>
+      <button class="adm-tab" onclick="switchTab('fleet', this)">Géppark</button>
+    </div>
+
+    <!-- ═══ REFERENCIÁK TAB ═══ -->
+    <div class="adm-tab-pane active" id="tab-refs">
+      <div class="adm-sec-head">
+        <h2>Referenciák</h2>
+        <button class="btn-adm" onclick="openRefModal()">+ Új referencia</button>
+      </div>
+      <div class="adm-list" id="ref-list"></div>
+      <div class="export-bar">
+        <span class="export-bar__lbl">Adatok:</span>
+        <button class="btn-adm-sec" onclick="exportJSON('refs')">JSON letöltése</button>
+        <label class="btn-adm-sec" style="cursor:pointer">
+          JSON importálása
+          <input type="file" accept=".json" style="display:none" onchange="importJSON(event,'refs')">
+        </label>
+        <span style="font-size:.76rem;color:var(--text-dim);font-weight:300">A letöltött fájlt töltse fel a <code style="color:var(--orange)">data/references.json</code> helyre.</span>
+      </div>
+    </div>
+
+    <!-- ═══ GÉPPARK TAB ═══ -->
+    <div class="adm-tab-pane" id="tab-fleet">
+      <div class="adm-sec-head">
+        <h2>Géppark</h2>
+        <button class="btn-adm" onclick="openFleetModal()">+ Új gép</button>
+      </div>
+      <div class="adm-list" id="fleet-list"></div>
+      <div class="export-bar">
+        <span class="export-bar__lbl">Adatok:</span>
+        <button class="btn-adm-sec" onclick="exportJSON('fleet')">JSON letöltése</button>
+        <label class="btn-adm-sec" style="cursor:pointer">
+          JSON importálása
+          <input type="file" accept=".json" style="display:none" onchange="importJSON(event,'fleet')">
+        </label>
+        <span style="font-size:.76rem;color:var(--text-dim);font-weight:300">A letöltött fájlt töltse fel a <code style="color:var(--orange)">data/fleet.json</code> helyre.</span>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<!-- ══ MODALS ══════════════════════════════ -->
+
+<!-- Referencia modal -->
+<div class="adm-modal" id="ref-modal">
+  <div class="adm-modal__box">
+    <div class="adm-modal__head">
+      <h3 id="ref-modal-title">Új referencia</h3>
+      <button class="btn-x" onclick="closeModal('ref-modal')">×</button>
+    </div>
+    <form id="ref-form" onsubmit="saveRef(event)">
+      <input type="hidden" id="rf-id">
+      <div class="form-group">
+        <label class="form-label">Cím *</label>
+        <input class="form-ctrl" id="rf-title" required placeholder="pl. Lakóház alapásás">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Helyszín *</label>
+        <input class="form-ctrl" id="rf-loc" required placeholder="pl. Pécs, Mecsekoldal">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Kategória *</label>
+        <select class="form-ctrl" id="rf-cat" required>
+          <option value="">– Válasszon –</option>
+          <option>Tereprendezés</option>
+          <option>Alapásás</option>
+          <option>Medenceásás</option>
+          <option>Sáncolás/árkolás</option>
+          <option>Dömper fuvar</option>
+          <option>Bontás/feltöltés</option>
+          <option>Kertépítési munkák</option>
+          <option>Szűk helyi munkák</option>
+          <option>Egyéb</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Év *</label>
+        <input class="form-ctrl" id="rf-year" type="number" min="2010" max="2030" required placeholder="2024">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Leírás</label>
+        <textarea class="form-ctrl" id="rf-desc" rows="3" placeholder="Rövid leírás a munkáról…"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Fotó (opcionális)</label>
+        <input type="file" accept="image/*" class="form-ctrl" id="rf-photo" onchange="previewImg(this,'rf-preview')" style="padding:10px">
+        <div id="rf-preview" style="margin-top:10px;display:none">
+          <img id="rf-preview-img" style="max-width:100%;max-height:160px;object-fit:cover;border:1px solid var(--border)">
+        </div>
+        <input type="hidden" id="rf-photo-b64">
+      </div>
+      <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px">
+        <button type="button" class="btn-adm-sec" onclick="closeModal('ref-modal')">Mégse</button>
+        <button type="submit" class="btn-adm">Mentés</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Gép modal -->
+<div class="adm-modal" id="fleet-modal">
+  <div class="adm-modal__box">
+    <div class="adm-modal__head">
+      <h3 id="fleet-modal-title">Új gép</h3>
+      <button class="btn-x" onclick="closeModal('fleet-modal')">×</button>
+    </div>
+    <form id="fleet-form" onsubmit="saveFleet(event)">
+      <input type="hidden" id="ff-id">
+      <div class="form-group">
+        <label class="form-label">Gép neve *</label>
+        <input class="form-ctrl" id="ff-name" required placeholder="pl. Yanmar VIO 57">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Kategória</label>
+        <input class="form-ctrl" id="ff-cat" placeholder="pl. Lánctalpas kotrógép">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tömeg</label>
+        <input class="form-ctrl" id="ff-weight" placeholder="pl. 5700 kg">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Badge (rövid jelölő)</label>
+        <input class="form-ctrl" id="ff-badge" placeholder="pl. Nagy munkák">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Leírás</label>
+        <textarea class="form-ctrl" id="ff-desc" rows="3" placeholder="Rövid leírás…"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Specifikációk (kulcs: érték soronként)</label>
+        <textarea class="form-ctrl" id="ff-specs" rows="6" placeholder="Működési tömeg: 5700 kg&#10;Motor: 36,8 kW&#10;Max ásási mélység: 3,54 m"></textarea>
+        <small style="color:var(--text-dim);font-size:.76rem;font-weight:300;display:block;margin-top:6px">Soronként egy spec, kettőspont elválasztóval.</small>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Fotó (opcionális)</label>
+        <input type="file" accept="image/*" class="form-ctrl" id="ff-photo" onchange="previewImg(this,'ff-preview')" style="padding:10px">
+        <div id="ff-preview" style="margin-top:10px;display:none">
+          <img id="ff-preview-img" style="max-width:100%;max-height:160px;object-fit:cover;border:1px solid var(--border)">
+        </div>
+        <input type="hidden" id="ff-photo-b64">
+      </div>
+      <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px">
+        <button type="button" class="btn-adm-sec" onclick="closeModal('fleet-modal')">Mégse</button>
+        <button type="submit" class="btn-adm">Mentés</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════
+   Admin JS – KotróBázis
+═══════════════════════════════════════════ */
+const PW   = 'kotrobazis2025';
+const SK_R = 'kb_references';
+const SK_F = 'kb_fleet';
+
+/* ── Auth ─────────────────────────────────── */
+function doLogin() {
+  const pw = document.getElementById('pw').value;
+  if (pw === PW) {
+    sessionStorage.setItem('kb_admin', '1');
+    showDash();
+  } else {
+    document.getElementById('login-err').style.display = 'block';
+  }
+}
+document.getElementById('pw')?.addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+
+function logout() {
+  sessionStorage.removeItem('kb_admin');
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('pw').value = '';
+}
+
+function showDash() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  renderRefs();
+  renderFleet();
+}
+
+// Auto-login if session exists
+if (sessionStorage.getItem('kb_admin') === '1') showDash();
+
+/* ── Tabs ──────────────────────────────────── */
+function switchTab(name, btn) {
+  document.querySelectorAll('.adm-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.adm-tab-pane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+/* ── Storage helpers ───────────────────────── */
+function getRefs()  { return JSON.parse(localStorage.getItem(SK_R) || '[]'); }
+function setRefs(d) { localStorage.setItem(SK_R, JSON.stringify(d)); }
+function getFleet() { return JSON.parse(localStorage.getItem(SK_F) || '[]'); }
+function setFleet(d){ localStorage.setItem(SK_F, JSON.stringify(d)); }
+function nextId(arr){ return arr.length ? Math.max(...arr.map(x => x.id || 0)) + 1 : 1; }
+
+/* ── Toast ─────────────────────────────────── */
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+/* ── Modal helpers ─────────────────────────── */
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+
+// Close on backdrop click
+document.querySelectorAll('.adm-modal').forEach(m =>
+  m.addEventListener('click', e => { if (e.target === m) closeModal(m.id); })
+);
+
+/* ── Photo preview / base64 ────────────────── */
+function previewImg(input, wrapId) {
+  const file = input.files[0];
+  if (!file) return;
+  const b64Id = input.id.replace('-photo', '-photo-b64');
+  const wrap  = document.getElementById(wrapId);
+  const imgEl = document.getElementById(wrapId + '-img');
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById(b64Id).value = e.target.result;
+    imgEl.src = e.target.result;
+    wrap.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ══ REFERENCES ═══════════════════════════════ */
+function renderRefs() {
+  const refs = getRefs().slice().sort((a,b) => (b.year || 0) - (a.year || 0));
+  const list = document.getElementById('ref-list');
+  if (!refs.length) {
+    list.innerHTML = `<p style="color:var(--text-dim);font-weight:300;font-size:.9rem">Még nincs referencia. Adj hozzá egyet!</p>`;
+    return;
+  }
+  list.innerHTML = refs.map(r => `
+    <div class="adm-item">
+      <div class="adm-item__thumb">
+        ${r.photo ? `<img src="${r.photo}" alt="">` : `<svg width="24" height="24" viewBox="0 0 40 40" fill="none" stroke="#555" stroke-width="1.5"><rect x="2" y="6" width="36" height="28" rx="2"/><circle cx="13" cy="17" r="4"/><path d="M2 28l9-8 6 5 7-8 10 11"/></svg>`}
+      </div>
+      <div class="adm-item__info">
+        <div class="adm-item__name">${esc(r.title)}</div>
+        <div class="adm-item__meta">${esc(r.category)} · ${esc(r.location)} · ${r.year}</div>
+      </div>
+      <div class="adm-item__actions">
+        <button class="btn-edit" onclick="editRef(${r.id})">Szerkesztés</button>
+        <button class="btn-del" onclick="deleteRef(${r.id})">Törlés</button>
+      </div>
+    </div>`).join('');
+}
+
+function openRefModal(id) {
+  document.getElementById('ref-modal-title').textContent = id ? 'Referencia szerkesztése' : 'Új referencia';
+  document.getElementById('ref-form').reset();
+  document.getElementById('rf-preview').style.display = 'none';
+  document.getElementById('rf-photo-b64').value = '';
+  if (id) {
+    const r = getRefs().find(x => x.id === id);
+    if (!r) return;
+    document.getElementById('rf-id').value    = r.id;
+    document.getElementById('rf-title').value = r.title;
+    document.getElementById('rf-loc').value   = r.location;
+    document.getElementById('rf-cat').value   = r.category;
+    document.getElementById('rf-year').value  = r.year;
+    document.getElementById('rf-desc').value  = r.description || '';
+    if (r.photo) {
+      document.getElementById('rf-photo-b64').value = r.photo;
+      document.getElementById('rf-preview-img').src = r.photo;
+      document.getElementById('rf-preview').style.display = 'block';
+    }
+  } else {
+    document.getElementById('rf-id').value = '';
+  }
+  openModal('ref-modal');
+}
+
+function editRef(id) { openRefModal(id); }
+
+function deleteRef(id) {
+  if (!confirm('Biztosan törli ezt a referenciát?')) return;
+  setRefs(getRefs().filter(x => x.id !== id));
+  renderRefs();
+  toast('Referencia törölve.');
+}
+
+function saveRef(e) {
+  e.preventDefault();
+  const refs  = getRefs();
+  const rawId = document.getElementById('rf-id').value;
+  const id    = rawId ? parseInt(rawId) : nextId(refs);
+  const photo = document.getElementById('rf-photo-b64').value || null;
+  const obj   = {
+    id,
+    title:       document.getElementById('rf-title').value.trim(),
+    location:    document.getElementById('rf-loc').value.trim(),
+    category:    document.getElementById('rf-cat').value,
+    year:        parseInt(document.getElementById('rf-year').value),
+    description: document.getElementById('rf-desc').value.trim(),
+    photo,
+  };
+  if (rawId) {
+    const idx = refs.findIndex(x => x.id === id);
+    if (idx > -1) refs[idx] = obj; else refs.push(obj);
+  } else {
+    refs.push(obj);
+  }
+  setRefs(refs);
+  closeModal('ref-modal');
+  renderRefs();
+  toast('Referencia mentve!');
+}
+
+/* ══ FLEET ════════════════════════════════════ */
+function renderFleet() {
+  const fleet = getFleet();
+  const list  = document.getElementById('fleet-list');
+  if (!fleet.length) {
+    list.innerHTML = `<p style="color:var(--text-dim);font-weight:300;font-size:.9rem">Még nincs gép felvéve.</p>`;
+    return;
+  }
+  list.innerHTML = fleet.map(f => `
+    <div class="adm-item">
+      <div class="adm-item__thumb">
+        ${f.photo ? `<img src="${f.photo}" alt="">` : `<svg width="24" height="24" viewBox="0 0 56 56" fill="none" stroke="#555" stroke-width="1.5"><rect x="4" y="18" width="30" height="22" rx="2"/><rect x="34" y="24" width="18" height="10" rx="1"/><line x1="8" y1="40" x2="48" y2="40"/><circle cx="12" cy="44" r="4"/><circle cx="44" cy="44" r="4"/></svg>`}
+      </div>
+      <div class="adm-item__info">
+        <div class="adm-item__name">${esc(f.name)}</div>
+        <div class="adm-item__meta">${esc(f.category)} · ${esc(f.weight)}</div>
+      </div>
+      <div class="adm-item__actions">
+        <button class="btn-edit" onclick="editFleet(${f.id})">Szerkesztés</button>
+        <button class="btn-del" onclick="deleteFleet(${f.id})">Törlés</button>
+      </div>
+    </div>`).join('');
+}
+
+function openFleetModal(id) {
+  document.getElementById('fleet-modal-title').textContent = id ? 'Gép szerkesztése' : 'Új gép';
+  document.getElementById('fleet-form').reset();
+  document.getElementById('ff-preview').style.display = 'none';
+  document.getElementById('ff-photo-b64').value = '';
+  if (id) {
+    const f = getFleet().find(x => x.id === id);
+    if (!f) return;
+    document.getElementById('ff-id').value     = f.id;
+    document.getElementById('ff-name').value   = f.name;
+    document.getElementById('ff-cat').value    = f.category || '';
+    document.getElementById('ff-weight').value = f.weight || '';
+    document.getElementById('ff-badge').value  = f.badge || '';
+    document.getElementById('ff-desc').value   = f.description || '';
+    // Specs object → text
+    const specsText = f.specs
+      ? Object.entries(f.specs).map(([k,v]) => `${k}: ${v}`).join('\n')
+      : '';
+    document.getElementById('ff-specs').value = specsText;
+    if (f.photo) {
+      document.getElementById('ff-photo-b64').value = f.photo;
+      document.getElementById('ff-preview-img').src = f.photo;
+      document.getElementById('ff-preview').style.display = 'block';
+    }
+  } else {
+    document.getElementById('ff-id').value = '';
+  }
+  openModal('fleet-modal');
+}
+
+function editFleet(id) { openFleetModal(id); }
+
+function deleteFleet(id) {
+  if (!confirm('Biztosan törli ezt a gépet?')) return;
+  setFleet(getFleet().filter(x => x.id !== id));
+  renderFleet();
+  toast('Gép törölve.');
+}
+
+function saveFleet(e) {
+  e.preventDefault();
+  const fleet = getFleet();
+  const rawId = document.getElementById('ff-id').value;
+  const id    = rawId ? parseInt(rawId) : nextId(fleet);
+  const photo = document.getElementById('ff-photo-b64').value || null;
+  // Parse specs
+  const specsRaw = document.getElementById('ff-specs').value.trim();
+  const specs = {};
+  specsRaw.split('\n').forEach(line => {
+    const col = line.indexOf(':');
+    if (col > -1) {
+      const k = line.slice(0, col).trim();
+      const v = line.slice(col + 1).trim();
+      if (k) specs[k] = v;
+    }
+  });
+  const obj = {
+    id,
+    name:        document.getElementById('ff-name').value.trim(),
+    category:    document.getElementById('ff-cat').value.trim(),
+    weight:      document.getElementById('ff-weight').value.trim(),
+    badge:       document.getElementById('ff-badge').value.trim(),
+    description: document.getElementById('ff-desc').value.trim(),
+    specs,
+    photo,
+  };
+  if (rawId) {
+    const idx = fleet.findIndex(x => x.id === id);
+    if (idx > -1) fleet[idx] = obj; else fleet.push(obj);
+  } else {
+    fleet.push(obj);
+  }
+  setFleet(fleet);
+  closeModal('fleet-modal');
+  renderFleet();
+  toast('Gép mentve!');
+}
+
+/* ══ EXPORT / IMPORT ═══════════════════════════ */
+function exportJSON(type) {
+  const data = type === 'refs' ? getRefs() : getFleet();
+  const fname = type === 'refs' ? 'references.json' : 'fleet.json';
+  const blob  = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url   = URL.createObjectURL(blob);
+  const a     = document.createElement('a');
+  a.href = url; a.download = fname; a.click();
+  URL.revokeObjectURL(url);
+  toast(fname + ' letöltve!');
+}
+
+function importJSON(event, type) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!Array.isArray(data)) throw new Error('Nem tömb');
+      if (type === 'refs') { setRefs(data); renderRefs(); }
+      else { setFleet(data); renderFleet(); }
+      toast('Import sikeres! ' + data.length + ' rekord betöltve.');
+    } catch (err) {
+      toast('Hibás JSON fájl: ' + err.message);
+    }
+    event.target.value = '';
+  };
+  reader.readAsText(file);
+}
+
+/* ── Util ────────────────────────────────────── */
+function esc(s) {
+  return String(s ?? '')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>

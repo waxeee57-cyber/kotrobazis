@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "name": "Yanmar VIO 57",
+    "category": "Lánctalpas kotrógép",
+    "weight": "5700 kg",
+    "badge": "Nagyteljesítményű",
+    "description": "Nullafordulatos kompakt lánctalpas kotrógép – nagy teljesítmény, kis nyomtáv. Ideális tereprendezéshez, alapásáshoz, medenceásáshoz. A nullafordulatos felépítmény szűkebb területeken is biztonságosan dolgozik.",
+    "specs": {
+      "Működési tömeg": "5 700 kg",
+      "Motor teljesítmény": "36,8 kW (50 LE)",
+      "Kanálkapacitás": "0,14–0,21 m³",
+      "Max ásási mélység": "3,54 m",
+      "Max nyújtókar hossz": "5,53 m",
+      "Nyomtáv (szűk/széles)": "1 600 / 2 000 mm",
+      "Talpszélesség": "400 mm"
+    },
+    "photo": null
+  },
+  {
+    "id": 2,
+    "name": "Yanmar VIO 17",
+    "category": "Minikotrógép",
+    "weight": "1 700 kg",
+    "badge": "Szűk helyekre",
+    "description": "Nullafordulatos minikotrógép szoros terekhez – zárt udvarokba, kapun át, akár beltérbe is bevihető. Ahol a nagy gép nem fér be, ott a VIO 17 megoldja.",
+    "specs": {
+      "Működési tömeg": "1 700 kg",
+      "Motor teljesítmény": "11,5 kW (15,6 LE)",
+      "Kanálkapacitás": "0,034 m³",
+      "Max ásási mélység": "2,22 m",
+      "Max nyújtókar hossz": "3,43 m",
+      "Nyomtáv": "990 mm",
+      "Kapun átfér?": "Igen (990 mm)"
+    },
+    "photo": null
+  },
+  {
+    "id": 3,
+    "name": "3,5 tonnás billencs",
+    "category": "Szállítójármű",
+    "weight": "3 500 kg",
+    "badge": "Azonnali",
+    "description": "Saját billencsünkkel nincs szállításra várakozás – a kitermelés és az elszállítás egy csapatban, azonnal. Pécs és 40 km-es körzetben.",
+    "specs": {
+      "Terhelhetőség": "3 500 kg",
+      "Platóméret": "3,40 × 2,0 m",
+      "Meghajtás": "4×4",
+      "Hatókör": "Pécs + 40 km",
+      "Elérhetőség": "Azonnal, kotrással együtt"
+    },
+    "photo": null
+  }
+]
