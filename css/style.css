@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════
    KotróBázis – style.css
    Industrial catalog × European motorsport
-   Off-white · Black · Orange accent only
+   Off-white · Black · Oxver accent only
 ═══════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500;600&display=swap');
@@ -10,8 +10,9 @@
 :root {
   --ow:          #F5F0E8;   /* off-white – primary bg */
   --black:       #0A0A0A;
-  --orange:      #E8720C;
-  --orange-dk:   #C55E0A;
+  --orange:      #6E1423;   /* Oxver - vilagos alapra, 10.36:1 */
+  --orange-dk:   #520F1A;   /* hover / aktiv */
+  --orange-lt:   #D9483B;   /* teglavoros - fekete szekciokra, 4.66:1 */
   --grey-lt:     #E8E2D8;   /* section variant */
   --grey-ph:     #C8C0B0;   /* photo placeholder */
   --grey-txt:    #8A8278;   /* muted on off-white */
@@ -1175,4 +1176,25 @@ textarea.form-ctrl { resize: vertical; min-height: 100px; }
 
 @media (prefers-reduced-motion: reduce) {
   .ticker__track { animation: none; white-space: normal; padding: 0.5rem 2rem; }
+}
+
+/* ═══════════════════════════════════════════
+   AKCENTUS SÖTÉT SZEKCIÓKON
+   Az oxvér (#6E1423) fekete alapon 1,69:1 — olvashatatlan.
+   Itt a token téglavörösre vált, így minden meglévő
+   var(--orange) hivatkozás magától jó értéket kap.
+   #D9483B a #0A0A0A alapon = 4,66:1 (WCAG AA)
+═══════════════════════════════════════════ */
+.nav.scrolled,
+.nav__drawer,
+.ticker,
+.svc-a,
+.ref-item__over,
+.contact,
+.footer,
+.page-hero,
+.gpk-cta,
+.adm-body {
+  --orange:    #D9483B;
+  --orange-dk: #E2564A;
 }
