@@ -115,7 +115,9 @@
             <circle cx="20" cy="24" r="5"/>
             <path d="M6 38l11-9 7 6 9-11 12 14"/>
           </svg>
-          <p>Rövidesen referenciák kerülnek ide.</p>
+          <p><strong>Az első referenciánk lehet.</strong></p>
+          <p>Minden elkészült munkáról fotót és rövid leírást teszünk közzé – a megrendelő jóváhagyásával. Kérjen ajánlatot, és beszéljük meg a munkát.</p>
+          <a href="#kapcsolat" class="btn btn--solid">Ajánlatot kérek</a>
         </div>`;
       return;
     }

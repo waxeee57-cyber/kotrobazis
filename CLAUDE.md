@@ -142,3 +142,30 @@ vercel.json         cleanUrls, cache headerek, security headerek, /admin rewrite
 - Az `admin/index.html` **510 soros önhordó fájl** saját inline CSS/JS-sel —
   nem használja a `css/style.css`-t és a `js/main.js`-t. Ha a design változik,
   az admint külön kell utánhúzni.
+
+## Dizájn-rendszer szabályok (2026-09 audit után)
+
+**Akcentus-tokenek — soha ne írj hardcode hexet.**
+- `--orange` = `#6E1423` oxvér (világos alapon 10,36:1). A név történelmi, az érték bordó.
+- `--orange-dk` = `#520F1A` hover.
+- `--orange-lt` = `#D9483B` téglavörös — **csak fekete szekciókra** (4,66:1).
+- A sötét szekciók (`.nav.scrolled, .ticker, .svc-a, .contact, .footer, .page-hero, .gpk-cta, .adm-body`)
+  egy scope-olt blokkban felüldefiniálják a `--orange` tokent `--orange-lt`-re, így minden
+  meglévő `var(--orange)` hivatkozás magától jó értéket kap. Új sötét szekciót ide kell felvenni.
+
+**Halvány szöveg**
+- `--grey-txt` = `#6E6862` (off-white alapon 4,85:1).
+- `--grey-txt-lt` = `#635D57` — a `.trust`, `.svc-b`, `.cmp-section` grey-lt alapjaira (5,04:1),
+  szintén scope-olt token-felüldefiniálással.
+
+**Kötelező minimumok**
+- Minden interaktív elem ≥ 44×44 px. A `.nav__burger` flex-item, ezért `flex: 0 0 44px` kell neki.
+- Minden szövegszín ≥ 4,5:1 a mögötte lévő valódi alapon.
+- Mobilon (≤820px) a törzsszöveg 1rem, a mikro-címkék 0,76rem.
+- `.callbar` = fix alsó hívósáv mobilon; a `body` ezért `padding-bottom: 56px`.
+  A `.wa-float` mobilon rejtve van, mert rátakart a hero CTA-ra.
+- Minden oldal `</body>` előtt tartalmazza a `.callbar` blokkot.
+
+**Ellenőrzés**
+Headless Chromium + teljes végiggörgetés, 390 és 1440 px: tap-target méret,
+kontrasztarány a valódi festett ősre, vízszintes túlcsordulás, JS-hiba.
